@@ -10,7 +10,7 @@ import java.util.Date;
 public abstract class Tweet implements Tweetable {
     private String message;
     private Date date;
-    private ArrayList<Mood> moods;
+    //private ArrayList<Mood> moods;
 
     public Tweet(String message){
         this.message = message;
@@ -43,5 +43,10 @@ public abstract class Tweet implements Tweetable {
         else{
             throw new TweetTooLongException();
         }
+    }
+
+    @Override
+    public String toString(){
+        return date.toString() + " | " + message;
     }
 }
