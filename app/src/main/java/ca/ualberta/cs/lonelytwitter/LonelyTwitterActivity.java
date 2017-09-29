@@ -1,3 +1,13 @@
+/*
+ * Class Name: LonelyTwitterActivity
+ *
+ * Version: Version 1.0
+ *
+ * Date : September 28, 2017
+ *
+ * Copyright (c) My Copyright, CMPUT301, University of Alberta - All Rights Reserved. You may use, distribute, or modify this code under terms and conditions of the Code of Students Behavior at University of Alberta
+ */
+
 package ca.ualberta.cs.lonelytwitter;
 
 import java.io.BufferedReader;
@@ -25,14 +35,22 @@ import android.widget.ListView;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+/**
+ * Main interface for the app
+ *
+ * @author Ryan De Forest
+ * @version 1.0
+ * @since 1.0
+ */
+
 public class LonelyTwitterActivity extends Activity {
 
-	private static final String FILENAME = "file.sav";
+	private static final String FILENAME = "file.sav";	// name of file to save/load data from
 	private EditText bodyText;
 	private ListView oldTweetsList;
 
-	private ArrayList<Tweet> tweets = new ArrayList<Tweet>();
-	private ArrayAdapter<Tweet> adapter;
+	private ArrayList<Tweet> tweets = new ArrayList<Tweet>(); // container for the tweet objects
+	private ArrayAdapter<Tweet> adapter; // adapter that controls the displaying of the tweets
 	
 	/** Called when the activity is first created. */
 	@Override
@@ -45,6 +63,7 @@ public class LonelyTwitterActivity extends Activity {
 		Button clearButton = (Button) findViewById(R.id.clear);
 		oldTweetsList = (ListView) findViewById(R.id.oldTweetsList);
 
+		/* Sets the functionality of the save button to save the tweets */
 		saveButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -57,6 +76,7 @@ public class LonelyTwitterActivity extends Activity {
 			}
 		});
 
+		/* Sets the functionality of the clear to button to clear the tweets */
 		clearButton.setOnClickListener(new View.OnClickListener() {
 
 			public void onClick(View v) {
@@ -69,6 +89,11 @@ public class LonelyTwitterActivity extends Activity {
 		});
 	}
 
+	/**
+	 * Called when the activity starts and will load the Tweet array with any saved Tweets
+	 * from before
+	 */
+
 	@Override
 	protected void onStart() {
 		// TODO Auto-generated method stub
@@ -78,6 +103,11 @@ public class LonelyTwitterActivity extends Activity {
 				R.layout.list_item, tweets);
 		oldTweetsList.setAdapter(adapter);
 	}
+
+	/**
+	 * Reads a file and uses Gson to convert the input into an arraylist of tweets that had been
+	 * saved
+	 */
 
 	private void loadFromFile() {
 
@@ -96,7 +126,11 @@ public class LonelyTwitterActivity extends Activity {
 			throw new RuntimeException();
 		}
 	}
-	
+
+	/**
+	 * Takes an arraylist of tweets and uses Gson to convert it to be saved to a file
+	 */
+
 	private void saveInFile() {
 		try {
 			FileOutputStream fos = openFileOutput(FILENAME,
