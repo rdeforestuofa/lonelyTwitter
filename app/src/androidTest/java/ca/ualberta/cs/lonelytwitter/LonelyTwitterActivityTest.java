@@ -26,7 +26,7 @@ public class LonelyTwitterActivityTest extends ActivityInstrumentationTestCase2<
 
 
     public void testStart() throws Exception {
-        Activity activity = getActivity();
+        //remove unused activity variable
 
     }
 
